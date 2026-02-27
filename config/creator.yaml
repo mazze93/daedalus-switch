@@ -1,0 +1,84 @@
+# DAEDALUS Context Configuration
+# Context: Creative Work (Music, Writing, Visual Art)
+# This profile prioritizes creative tools and artistic expression
+
+version: 1.0
+
+context:
+  name: creator
+  description: "Creative work - Music production, writing (Merchants of War), visual art, design"
+  sensitivity_level: medium
+  created_date: "2026-01-13"
+  last_modified: "2026-01-13"
+
+vpn:
+  provider: "proton-vpn"
+  server: "proton-vpn-creative"
+  profile_name: "Creative"
+  auto_connect: false  # Not always necessary for creative work
+  kill_switch: false
+
+browser:
+  profile: "creator-workspace"
+  engine: "safari"
+  urls_to_open:
+    - "https://soundcloud.com"
+    - "https://bandcamp.com"
+    - "https://wattpad.com"
+  clear_browsing_ false
+
+terminal:
+  iterm_profile: "creator"
+  shell: "zsh"
+  ssh_key: "~/.ssh/id_rsa_creative"
+  env_vars: |
+    WORK_CONTEXT=creative
+    MUSIC_PRODUCTION=1
+    WRITING_PROJECT=merchants_of_war
+
+notifications:
+  focus_mode: "Creative"
+  allow_apps:
+    - "Music production software"
+    - "Design apps"
+    - "Writing tools"
+  suppress_apps:
+    - "Slack"
+    - "Work email"
+    - "GitHub"
+  dnd_schedule:
+    start: "19:00"
+    end: "06:00"
+
+filesystem:
+  mount_paths: []
+  hide_directories:
+    - "~/.daedalus/daedalus"
+    - "~/.daedalus/ryan"
+    - "~/.daedalus/community"
+  spotlight_ignore:
+    - "~/.daedalus/daedalus"
+    - "~/.daedalus/ryan"
+
+applications:
+  allowed:
+    - "Logic Pro"
+    - "Ableton Live"
+    - "Scrivener"
+    - "Final Cut Pro"
+    - "Adobe Creative Suite"
+    - "Photos"
+    - "Safari"
+    - "1Password"
+
+security:
+  require_biometric_unlock: false
+  lock_screen_timeout: 600  # 10 minutes (longer for flow state)
+
+creative_workspace:
+  distraction_minimization: true
+  # Hide work/professional notifications
+  focus_environment: "ADHD-friendly"
+  # Reduce cognitive load with minimal notifications
+  auto_backup_enabled: true
+  # Backup creative work frequently

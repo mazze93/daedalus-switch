@@ -1,0 +1,93 @@
+# DAEDALUS Context Configuration
+# Context: Security Professional / Secure Pride Work
+# This profile prioritizes security auditing and SOGI data protection
+
+version: 1.0
+
+context:
+  name: daedalus
+  description: "Security professional - Secure Pride work, threat modeling, penetration testing"
+  sensitivity_level: high
+  created_date: "2026-01-13"
+  last_modified: "2026-01-13"
+
+vpn:
+  provider: "proton-vpn"
+  server: "proton-vpn-security"
+  profile_name: "Security Audit"
+  auto_connect: true
+  kill_switch: true
+  # Note: Configure Proton VPN server name via: protonvpn config
+  # Run 'protonvpn list' to see available servers
+
+browser:
+  profile: "daedalus-professional"
+  engine: "safari"
+  urls_to_open:
+    - "https://github.com/mazze93"
+    - "https://secure-pride.org"
+    - "https://github.com/secure-pride"
+  clear_browsing_ false
+  # For Safari: Manually create a separate user profile if needed
+  # For Chrome: Create profile "daedalus-professional" in Chrome settings first
+
+terminal:
+  iterm_profile: "daedalus"
+  shell: "zsh"
+  ssh_key: "~/.ssh/id_rsa_security"
+  env_vars: |
+    SECURE_PRIDE_ENV=production
+    WORK_CONTEXT=security
+    THREAT_MODEL_ACTIVE=1
+
+notifications:
+  focus_mode: "Security"
+  allow_apps:
+    - "Slack"
+    - "GitHub Desktop"
+    - "Mail (filtered)"
+    - "Slack (Secure Pride)"
+  suppress_apps:
+    - "Substack"
+    - "Adult platforms"
+    - "Music apps"
+    - "Photos"
+  dnd_schedule:
+    start: "09:00"
+    end: "18:00"
+
+filesystem:
+  mount_paths: []
+  # Future: Could mount encrypted volumes per context
+  hide_directories:
+    - "~/.daedalus/ryan"
+    - "~/.daedalus/creative"
+    - "~/.daedalus/community"
+  spotlight_ignore:
+    - "~/.daedalus/ryan"
+    - "~/.daedalus/creative"
+
+applications:
+  allowed:
+    - "iTerm2"
+    - "Xcode"
+    - "GitKraken"
+    - "Burp Suite"
+    - "1Password"
+    - "VS Code"
+    - "Safari"
+  # These apps won't be available in other contexts when isolation is strict
+
+security:
+  require_biometric_unlock: true
+  lock_screen_timeout: 300  # 5 minutes
+  # Note: Requires macOS security settings to be configured
+
+# Special considerations for SOGI data
+sogi_data_handling:
+  collect_only_when_necessary: true
+  make_collection_optional: true
+  encrypt_at_rest: "AES-256-GCM"
+  encrypt_in_transit: "TLS1.3"
+  retention_policy: "delete_after_90_days"
+  third_party_sharing: "prohibited"

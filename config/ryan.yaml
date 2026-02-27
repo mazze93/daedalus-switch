@@ -1,0 +1,90 @@
+# DAEDALUS Context Configuration
+# Context: Adult Content Creator (Ryan Cauthon)
+# This profile prioritizes privacy, anonymity, and adult-content-specific platforms
+
+version: 1.0
+
+context:
+  name: ryan
+  description: "Adult content creator - Performance, audience engagement, earnings"
+  sensitivity_level: high
+  created_date: "2026-01-13"
+  last_modified: "2026-01-13"
+
+vpn:
+  provider: "proton-vpn"
+  server: "proton-vpn-adult"
+  profile_name: "Adult Content"
+  auto_connect: true
+  kill_switch: true
+  # Configure via: protonvpn config
+  # Recommended: Use servers in privacy-friendly jurisdictions
+
+browser:
+  profile: "ryan-cauthon"
+  engine: "safari"
+  urls_to_open:
+    - "https://xhamster.com/users/ryan-cauthon"
+    # Add other adult platform URLs as needed
+  clear_browsing_ true
+  # Note: Safari doesn't fully clear between profile switches
+  # Consider clearing manually via Preferences > Privacy
+
+terminal:
+  iterm_profile: "ryan"
+  shell: "zsh"
+  ssh_key: "~/.ssh/id_rsa_personal"
+  env_vars: |
+    WORK_CONTEXT=adult_content
+    PERFORMER_MODE=1
+
+notifications:
+  focus_mode: "Creator"
+  allow_apps:
+    - "Direct messages"
+    - "Subscriber alerts"
+    - "Platform notifications"
+  suppress_apps:
+    - "Slack"
+    - "GitHub Desktop"
+    - "Work email"
+    - "Professional apps"
+    - "Security tools"
+  dnd_schedule:
+    start: "23:00"
+    end: "08:00"
+
+filesystem:
+  mount_paths: []
+  hide_directories:
+    - "~/.daedalus/daedalus"
+    - "~/.daedalus/creative"
+    - "~/.daedalus/community"
+  spotlight_ignore:
+    - "~/.daedalus/daedalus"
+    - "~/.daedalus/creative"
+    - "~/.daedalus/community"
+
+applications:
+  allowed:
+    - "Safari"
+    - "1Password"
+    - "Finder"
+    - "Photos"
+    - "Video editing tools"
+    - "Audio apps"
+
+security:
+  require_biometric_unlock: true
+  lock_screen_timeout: 300  # 5 minutes
+
+# Privacy-specific settings for adult content
+adult_content_privacy:
+  account_recovery_method: "alternative_email_or_recovery_codes"
+  # Avoid phone-based recovery (phone numbers can be compromised)
+  pseudonymous_profile: true
+  # Use stage name, not real name, for public profiles
+  real_name_separation: true
+  # Keep real identity completely separate from performer identity
+  encrypted_notes: true
+  # Store earnings tracking, dates, stats in encrypted format

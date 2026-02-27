@@ -1,0 +1,124 @@
+DAEDALUS - Identity & Context Switcher
+Version 1.0.0 | January 13, 2026
+
+=== QUICK START ===
+
+1. INSTALL PROTON VPN CLI:
+   brew install protonvpn-cli
+   protonvpn config
+
+2. COPY DAEDALUS:
+   cp -r /Users/daedalus/mcp-work/code/daedalus ~/.daedalus
+   mkdir -p ~/.daedalus/{daedalus,ryan,creative,community}
+
+3. MAKE EXECUTABLE:
+   chmod +x ~/.daedalus/bin/*
+   chmod +x ~/.daedalus/lib/*.sh
+
+4. ADD ALIAS (~/.zshrc):
+   alias daedalus="~/.daedalus/bin/daedalus"
+   source ~/.zshrc
+
+5. CREATE FOCUS MODES:
+   System Preferences > Focus > +
+   Create: "Security", "Creator", "Organizing"
+
+6. CREATE SSH KEYS:
+   ssh-keygen -t ed25519 -f ~/.ssh/id_rsa_security
+   ssh-keygen -t ed25519 -f ~/.ssh/id_rsa_personal
+   ssh-keygen -t ed25519 -f ~/.ssh/id_rsa_creative
+   ssh-keygen -t ed25519 -f ~/.ssh/id_rsa_community
+
+7. UPDATE CONFIGS:
+   nano ~/.daedalus/config/daedalus.yaml
+   - Update VPN server name (from: protonvpn list)
+   - Update terminal.ssh_key paths
+   - Update browser.urls_to_open
+   - Update notifications.focus_mode
+   
+   Repeat for: ryan.yaml, creator.yaml, organizer.yaml
+
+8. TEST:
+   daedalus switch daedalus
+   daedalus status
+   daedalus log
+
+=== COMMANDS ===
+
+daedalus switch <context>    # daedalus, ryan, creator, organizer
+daedalus status              # Show current context + system state
+daedalus audit               # Verify OPSEC integrity
+daedalus log [lines]         # View audit trail (default 20)
+daedalus emergency-kill      # Full reset (requires confirmation)
+daedalus help                # Show help
+
+=== VPN SERVER NAMES ===
+
+Run: protonvpn list
+
+Then update configs with server names from output, e.g.:
+  daedalus.yaml: vpn.server = "US#1"
+  ryan.yaml: vpn.server = "NL#1"
+
+=== TROUBLESHOOTING ===
+
+VPN won't connect:
+  protonvpn status
+  protonvpn connect --servername "US#1"
+
+Focus mode not found:
+  Create in System Preferences > Focus first
+
+Browser profile missing:
+  Safari: Uses iCloud sync
+  Chrome: Create profile in Settings > Profiles
+
+SSH key not found:
+  ssh-keygen -t ed25519 -f ~/.ssh/id_rsa_security
+  ssh-add ~/.ssh/id_rsa_security
+
+=== ARCHITECTURE ===
+
+~/.daedalus/
+  bin/          - Executable scripts (daedalus, _switch, _vpn, _browser, _terminal, etc.)
+  config/       - YAML context definitions (daedalus.yaml, ryan.yaml, creator.yaml, organizer.yaml)
+  lib/          - Utilities (logging.sh, config.sh, validation.sh)
+  logs/         - Audit trail (audit.log - 600 perms)
+  {contexts}/   - Context data directories (daedalus, ryan, creative, community)
+
+=== WHAT IT DOES ===
+
+One command atomically:
+1. Disconnects VPN → connects to context-specific server
+2. Sets iTerm2 profile + SSH key + environment variables
+3. Launches Safari/Chrome with context profile + URLs
+4. Activates macOS Focus mode + suppresses irrelevant notifications
+5. Hides other contexts' directories + enables Spotlight exclusion
+6. Logs all steps with timestamps for audit trail
+
+=== SECURITY ===
+
+✅ VPN kill-switch enabled
+✅ SSH keys isolated (400 perms)
+✅ Context directories hidden
+✅ Audit log restricted (600 perms)
+✅ No telemetry, no cloud, no third-party data
+✅ SOGI data encryption-by-default
+
+=== NEXT STEPS ===
+
+1. Review context configs to ensure accuracy
+2. Test first context switch: daedalus switch daedalus
+3. Run audit: daedalus audit
+4. Check status: daedalus status
+5. Schedule weekly audits: daedalus audit
+
+=== PROTON VPN LINK ===
+
+https://protonvpn.com/support/proton-vpn-command-line-tool/
+
+=== QUESTIONS? ===
+
+Run: daedalus help
+View logs: daedalus log
+Verify OPSEC: daedalus audit

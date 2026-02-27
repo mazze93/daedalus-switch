@@ -1,0 +1,82 @@
+# DAEDALUS Context Configuration
+# Context: Community Leadership (Tennis 919, LGBTQ+ Advocacy, Organizing)
+# This profile prioritizes community engagement and organizational tools
+
+version: 1.0
+
+context:
+  name: organizer
+  description: "Community leadership - Tennis 919, LGBTQ+ advocacy, event organizing, coalition building"
+  sensitivity_level: medium
+  created_date: "2026-01-13"
+  last_modified: "2026-01-13"
+
+vpn:
+  provider: "proton-vpn"
+  server: "proton-vpn-community"
+  profile_name: "Community"
+  auto_connect: false
+  kill_switch: false
+
+browser:
+  profile: "organizer-workspace"
+  engine: "safari"
+  urls_to_open:
+    - "https://tennis919.org"
+    - "https://secure-pride.org"
+  clear_browsing_ false
+
+terminal:
+  iterm_profile: "organizer"
+  shell: "zsh"
+  ssh_key: "~/.ssh/id_rsa_community"
+  env_vars: |
+    WORK_CONTEXT=community
+    COMMUNITY_ORGANIZER=1
+    TENNIS_919=1
+
+notifications:
+  focus_mode: "Organizing"
+  allow_apps:
+    - "Slack"
+    - "Discord"
+    - "Email"
+    - "Calendar"
+    - "Messaging apps"
+  suppress_apps:
+    - "Adult platforms"
+  dnd_schedule:
+    start: "22:00"
+    end: "09:00"
+
+filesystem:
+  mount_paths: []
+  hide_directories:
+    - "~/.daedalus/daedalus"
+    - "~/.daedalus/ryan"
+    - "~/.daedalus/creative"
+  spotlight_ignore:
+    - "~/.daedalus/daedalus"
+    - "~/.daedalus/ryan"
+
+applications:
+  allowed:
+    - "Slack"
+    - "Discord"
+    - "Safari"
+    - "Calendar"
+    - "Mail"
+    - "1Password"
+    - "Zoom"
+    - "Finder"
+
+security:
+  require_biometric_unlock: false
+  lock_screen_timeout: 600  # 10 minutes
+
+community_organizing:
+  protect_vulnerable_community_ true
+  # SOGI data for community members is sensitive
+  event_privacy_default: "members_only"
+  coalition_communications: "encrypted"
+  meeting_notes_encrypted: true

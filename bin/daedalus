@@ -1,0 +1,196 @@
+#!/usr/bin/env zsh
+# DAEDALUS - Identity & Context Switcher
+# macOS-native OPSEC automation for multi-identity management
+# Version: 1.0.0 (January 13, 2026)
+# Privacy-First, ADHD-Accessible, Locally-Audited
+
+set -euo pipefail
+
+# Root directory (where this script lives)
+DEADALUS_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../" && pwd)"
+DEADALUS_BIN="${DAEDALUS_ROOT}/bin"
+DEADALUS_CONFIG="${DAEDALUS_ROOT}/config"
+DEADALUS_LIB="${DAEDALUS_ROOT}/lib"
+DEADALUS_LOGS="${DAEDALUS_ROOT}/logs"
+
+# Source utility libraries
+source "${DAEDALUS_LIB}/logging.sh"
+source "${DAEDALUS_LIB}/config.sh"
+source "${DAEDALUS_LIB}/validation.sh"
+source "${DAEDALUS_LIB}/state.sh"
+
+# Ensure log directory exists
+mkdir -p "${DAEDALUS_LOGS}"
+
+# Colors for CLI output
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+BLUE='\033[0;34m'
+NC='\033[0m' # No Color
+
+# ============================================================================
+# COMMAND: switch <context>
+# ============================================================================
+command_switch() {
+    local context="${1:-}"
+    
+    if [[ -z "$context" ]]; then
+        echo -e "${RED}Error: Context required.${NC}"
+        echo "Usage: daedalus switch <context>"
+        echo "Available contexts: daedalus, ryan, creator, organizer"
+        return 1
+    fi
+    
+    # Validate context exists
+    if ! validate_context "$context"; then
+        echo -e "${RED}Error: Context '$context' not found.${NC}"
+        echo "Available contexts: daedalus, ryan, creator, organizer"
+        return 1
+    fi
+    
+    echo -e "${BLUE}[DAEDALUS] Switching to context: ${YELLOW}${context}${NC}"
+    log_event "SWITCH_START" "context=$context"
+    
+    # Execute context switch via orchestrator
+    if "${DAEDALUS_BIN}/_switch.sh" "$context"; then
+        log_event "SWITCH_SUCCESS" "context=$context"
+        set_current_context "$context"
+        echo -e "${GREEN}✓ Successfully switched to $context${NC}"
+        return 0
+    else
+        log_event "SWITCH_FAILED" "context=$context"
+        echo -e "${RED}✗ Failed to switch context. Emergency reset recommended.${NC}"
+        return 1
+    fi
+}
+
+# ============================================================================
+# COMMAND: status
+# ============================================================================
+command_status() {
+    "${DAEDALUS_BIN}/_status.sh"
+}
+
+# ============================================================================
+# COMMAND: audit
+# ============================================================================
+command_audit() {
+    "${DAEDALUS_BIN}/_audit.sh"
+}
+
+# ============================================================================
+# COMMAND: log <lines>
+# ============================================================================
+command_log() {
+    local lines="${1:-20}"
+    
+    if [[ ! -f "${DAEDALUS_LOGS}/audit.log" ]]; then
+        echo -e "${YELLOW}No audit log found yet.${NC}"
+        return 0
+    fi
+    
+    echo -e "${BLUE}[DAEDALUS] Audit Log (Last $lines entries):${NC}"
+    tail -n "$lines" "${DAEDALUS_LOGS}/audit.log"
+}
+
+# ============================================================================
+# COMMAND: emergency-kill
+# ============================================================================
+command_emergency_kill() {
+    echo -e "${RED}⚠️  EMERGENCY KILL SEQUENCE INITIATED${NC}"
+    echo -e "${RED}This will close all browsers, terminals, disconnect VPN, and reset to neutral state.${NC}"
+    read -p "Continue? (type 'yes' to confirm): " -r
+    
+    if [[ $REPLY == "yes" ]]; then
+        log_event "EMERGENCY_KILL" "initiated_by_user"
+        "${DAEDALUS_BIN}/_emergency_kill.sh"
+    else
+        echo "Emergency kill cancelled."
+        return 1
+    fi
+}
+
+# ============================================================================
+# COMMAND: help
+# ============================================================================
+command_help() {
+    cat << 'EOF'
+DAEDALUS - Identity & Context Switcher
+Version 1.0.0 | Privacy-First • ADHD-Accessible • Locally-Audited
+
+USAGE:
+  daedalus <command> [options]
+
+COMMANDS:
+  switch <context>         Activate an identity context
+                           Available: daedalus, ryan, creator, organizer
+                           
+  status                   Show current context and system state
+                           
+  audit                    Verify OPSEC integrity
+                           
+  log [lines]              Show audit log (default: last 20 entries)
+                           
+  emergency-kill           Full reset: close apps, disconnect VPN, reset state
+                           ⚠️  Requires confirmation
+                           
+  help                     Show this message
+
+EXAMPLES:
+  daedalus switch daedalus      # Activate security professional mode
+  daedalus switch ryan          # Activate adult content creator mode
+  daedalus status               # Check current context
+  daedalus audit                # Verify OPSEC integrity
+  daedalus emergency-kill       # Full reset (confirmation required)
+
+CONFIGURATION:
+  Context configs: ~/.daedalus/config/*.yaml
+  Audit logs: ~/.daedalus/logs/audit.log
+  
+INSTALLATION:
+  1. Install Proton VPN CLI: brew install protonvpn-cli
+  2. Configure your Proton credentials: protonvpn config
+  3. Review contexts in ~/.daedalus/config/
+  4. Run: daedalus switch daedalus
+
+DOCUMENTATION:
+  See README.md for detailed configuration and usage.
+EOF
+}
+
+# ============================================================================
+# MAIN DISPATCHER
+# ============================================================================
+main() {
+    local command="${1:-help}"
+    
+    case "$command" in
+        switch)
+            command_switch "${2:-}"
+            ;;
+        status)
+            command_status
+            ;;
+        audit)
+            command_audit
+            ;;
+        log)
+            command_log "${2:-20}"
+            ;;
+        emergency-kill)
+            command_emergency_kill
+            ;;
+        help|--help|-h)
+            command_help
+            ;;
+        *)
+            echo -e "${RED}Error: Unknown command '$command'${NC}"
+            echo "Run 'daedalus help' for usage information."
+            return 1
+            ;;
+    esac
+}
+
+# Execute
+main "$@"
