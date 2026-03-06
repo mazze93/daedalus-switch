@@ -1,10 +1,25 @@
 # DAEDALUS: Identity & Context Switcher
+![Platform](https://img.shields.io/badge/Platform-macOS-blue)
+![Interface](https://img.shields.io/badge/Interface-CLI%20%2B%20Automation-success)
+![Privacy](https://img.shields.io/badge/Posture-Privacy--First-critical)
+![Status](https://img.shields.io/badge/Status-Production--Ready-brightgreen)
 
-**Version**: 1.0.0 (January 13, 2026)  
-**Status**: Production-Ready  
-**Philosophy**: Privacy-First • ADHD-Accessible • Locally-Audited  
+![DAEDALUS Social Preview](.github/social-preview.png)
 
----
+DAEDALUS is an operational context-switching system for multi-identity workflows where mistakes have real privacy and safety consequences.
+
+## At a glance
+- Reduce context switching from many manual steps to one command.
+- Enforce identity posture with reproducible automation, not memory.
+- Keep cognitive overhead low for high-stakes environments.
+
+## Quick links
+- [Quick Start](#quick-start)
+- [Command Reference](#command-reference)
+- [Security Model](#security-model)
+
+## GitHub social preview
+Upload `.github/social-preview.png` in repository `Settings -> General -> Social preview` to use the branded card on link shares.
 
 ## What DAEDALUS Solves
 
