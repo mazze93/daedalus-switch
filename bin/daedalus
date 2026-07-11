@@ -38,14 +38,14 @@ command_switch() {
     if [[ -z "$context" ]]; then
         echo -e "${RED}Error: Context required.${NC}"
         echo "Usage: daedalus switch <context>"
-        echo "Available contexts: daedalus, ryan, creator, organizer"
+        echo "Available contexts: daedalus, personal, creator, organizer"
         return 1
     fi
     
     # Validate context exists
     if ! validate_context "$context"; then
         echo -e "${RED}Error: Context '$context' not found.${NC}"
-        echo "Available contexts: daedalus, ryan, creator, organizer"
+        echo "Available contexts: daedalus, personal, creator, organizer"
         return 1
     fi
     
@@ -124,7 +124,7 @@ USAGE:
 
 COMMANDS:
   switch <context>         Activate an identity context
-                           Available: daedalus, ryan, creator, organizer
+                           Available: daedalus, personal, creator, organizer
                            
   status                   Show current context and system state
                            
@@ -139,7 +139,7 @@ COMMANDS:
 
 EXAMPLES:
   daedalus switch daedalus      # Activate security professional mode
-  daedalus switch ryan          # Activate adult content creator mode
+  daedalus switch personal          # Activate adult content creator mode
   daedalus status               # Check current context
   daedalus audit                # Verify OPSEC integrity
   daedalus emergency-kill       # Full reset (confirmation required)
