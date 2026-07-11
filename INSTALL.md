@@ -43,14 +43,14 @@ For each context, create a corresponding Focus mode:
    - "Security" (for daedalus context)
    - "Creator" (for creative context)
    - "Organizing" (for organizer context)
-   - Your preference for ryan context
+   - Your preference for personal context
 
 #### Create Safari/Chrome Profiles (Optional)
 
 **Safari**: Preferences → Profiles (Safari uses iCloud sync; no true profile separation)
 
 **Chrome**: Settings → Profiles → Add profile
-- Create: "daedalus-professional", "ryan-cauthon", "creator-workspace", etc.
+- Create: "daedalus-professional", "personal-workspace", "creator-workspace", etc.
 - Sync each with separate Google account or local storage
 
 #### Create SSH Keys Per Context
@@ -60,7 +60,7 @@ For each context, create a corresponding Focus mode:
 ssh-keygen -t ed25519 -C "daedalus@secure-pride" -f ~/.ssh/id_rsa_security
 
 # Adult content context
-ssh-keygen -t ed25519 -C "ryan" -f ~/.ssh/id_rsa_personal
+ssh-keygen -t ed25519 -C "personal" -f ~/.ssh/id_rsa_personal
 
 # Creative context
 ssh-keygen -t ed25519 -C "creator" -f ~/.ssh/id_rsa_creative
@@ -75,7 +75,7 @@ ssh-keygen -t ed25519 -C "organizer" -f ~/.ssh/id_rsa_community
 
 ```bash
 # Copy from mcp-work (if building from project)
-cp -r /Users/daedalus/mcp-work/code/daedalus ~/.daedalus
+git clone https://github.com/mazze93/daedalus ~/.daedalus
 
 # OR: Clone if using git
 git clone https://github.com/secure-pride/daedalus.git ~/.daedalus
@@ -84,7 +84,7 @@ git clone https://github.com/secure-pride/daedalus.git ~/.daedalus
 ### Step 2: Create Context Directories
 
 ```bash
-mkdir -p ~/.daedalus/{daedalus,ryan,creative,community}
+mkdir -p ~/.daedalus/{daedalus,personal,creative,community}
 
 # These are where context-specific data lives
 # (future: encrypted volumes)

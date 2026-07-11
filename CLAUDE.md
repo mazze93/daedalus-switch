@@ -12,7 +12,7 @@ and filesystem visibility across multiple legitimate identities. Privacy-first, 
 | Context | Purpose |
 |---------|---------|
 | `daedalus` | Security professional |
-| `ryan` | Adult content creator |
+| `personal` | Personal |
 | `creator` | Creative work |
 | `organizer` | Community leadership |
 

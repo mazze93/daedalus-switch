@@ -94,7 +94,7 @@ fi
 
 # Check 8: Context data directories
 echo -n -e "${BLUE}[8/12]${NC} Checking context directories... "
-for ctx in daedalus ryan creative community; do
+for ctx in daedalus personal creative community; do
     if [[ ! -d "$HOME/.daedalus/$ctx" ]]; then
         echo -e "${RED}✗${NC} Missing: $ctx"
         ((failed++))

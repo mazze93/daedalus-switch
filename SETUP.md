@@ -11,8 +11,8 @@ protonvpn list    # View available servers
 
 ### 2. Copy DAEDALUS
 ```bash
-cp -r /Users/daedalus/mcp-work/code/daedalus ~/.daedalus
-mkdir -p ~/.daedalus/{daedalus,ryan,creative,community}
+git clone https://github.com/mazze93/daedalus ~/.daedalus
+mkdir -p ~/.daedalus/{daedalus,personal,creative,community}
 ```
 
 ### 3. Make Executable
@@ -43,7 +43,7 @@ ssh-keygen -t ed25519 -f ~/.ssh/id_rsa_community
 nano ~/.daedalus/config/daedalus.yaml
 # Update: vpn.server, terminal.ssh_key, browser.urls_to_open, notifications.focus_mode
 
-# Repeat for ryan.yaml, creator.yaml, organizer.yaml
+# Repeat for personal.yaml, creator.yaml, organizer.yaml
 ```
 
 ### 8. Test
@@ -75,7 +75,7 @@ daedalus log
 ## Commands
 
 ```bash
-daedalus switch <context>    # daedalus, ryan, creator, organizer
+daedalus switch <context>    # daedalus, personal, creator, organizer
 daedalus status              # Show current context
 daedalus audit               # Verify OPSEC
 daedalus log [lines]         # View switch history

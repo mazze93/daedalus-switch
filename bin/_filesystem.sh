@@ -82,7 +82,7 @@ echo -e "${BLUE}File System: Showing active context directories...${NC}"
 
 local daedalus_dir="${HOME}/.daedalus"
 
-for other_context in daedalus ryan creator organizer; do
+for other_context in daedalus personal creator organizer; do
     if [[ "$other_context" != "$context" ]]; then
         local context_dir="${daedalus_dir}/${other_context}"
         if [[ -d "$context_dir" ]]; then

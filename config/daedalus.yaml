@@ -60,11 +60,11 @@ filesystem:
   mount_paths: []
   # Future: Could mount encrypted volumes per context
   hide_directories:
-    - "~/.daedalus/ryan"
+    - "~/.daedalus/personal"
     - "~/.daedalus/creative"
     - "~/.daedalus/community"
   spotlight_ignore:
-    - "~/.daedalus/ryan"
+    - "~/.daedalus/personal"
     - "~/.daedalus/creative"
 
 applications:

@@ -5,7 +5,7 @@
 version: 1.0
 
 context:
-  name: ryan
+  name: personal
   description: "Adult content creator - Performance, audience engagement, earnings"
   sensitivity_level: high
   created_date: "2026-01-13"
@@ -21,17 +21,17 @@ vpn:
   # Recommended: Use servers in privacy-friendly jurisdictions
 
 browser:
-  profile: "ryan-cauthon"
+  profile: "personal-cauthon"
   engine: "safari"
   urls_to_open:
-    - "https://xhamster.com/users/ryan-cauthon"
+    - "https://xhamster.com/users/personal-cauthon"
     # Add other adult platform URLs as needed
   clear_browsing_ true
   # Note: Safari doesn't fully clear between profile switches
   # Consider clearing manually via Preferences > Privacy
 
 terminal:
-  iterm_profile: "ryan"
+  iterm_profile: "personal"
   shell: "zsh"
   ssh_key: "~/.ssh/id_rsa_personal"
   env_vars: |

@@ -67,7 +67,7 @@ fi
 
 # Check 4: Directory hidden flags
 echo -e "${BLUE}├─ Checking directory visibility...${NC}"
-for context in ryan creator organizer; do
+for context in personal creator organizer; do
     local context_dir="${HOME}/.daedalus/${context}"
     if [[ -d "$context_dir" ]]; then
         # Check if hidden
@@ -125,7 +125,7 @@ if [[ "$audit_passed" == "false" ]]; then
     echo "    1. Fix SSH key permissions: chmod 600 ~/.ssh/id_rsa_*"
     echo "    2. Fix audit log permissions: chmod 600 ~/.daedalus/logs/audit.log"
     echo "    3. Enable VPN kill-switch: protonvpn killswitch on"
-    echo "    4. Hide context directories: chflags hidden ~/.daedalus/ryan ~/.daedalus/creator"
+    echo "    4. Hide context directories: chflags hidden ~/.daedalus/personal ~/.daedalus/creator"
     log_event "AUDIT_FAILED" "severity=high"
 else
     echo -e "  ${GREEN}✓ All checks passed${NC}"

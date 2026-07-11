@@ -18,9 +18,6 @@ DAEDALUS is an operational context-switching system for multi-identity workflows
 - [Command Reference](#command-reference)
 - [Security Model](#security-model)
 
-## GitHub social preview
-Upload `.github/social-preview.png` in repository `Settings -> General -> Social preview` to use the branded card on link shares.
-
 ## What DAEDALUS Solves
 
 Managing multiple legitimate identities with genuinely different security/privacy requirements is **cognitively expensive and error-prone**:
@@ -34,7 +31,7 @@ Managing multiple legitimate identities with genuinely different security/privac
 
 ```bash
 daedalus switch daedalus    # Security professional mode
-daedalus switch ryan        # Adult content creator mode
+daedalus switch personal    # Personal mode
 daedalus switch creator     # Creative work mode
 daedalus switch organizer   # Community leadership mode
 ```
@@ -61,12 +58,12 @@ daedalus switch organizer   # Community leadership mode
 1. **Copy DAEDALUS to your home directory**:
    ```bash
    # If building from the project:
-   cp -r /Users/daedalus/mcp-work/code/daedalus ~/.daedalus
+   git clone https://github.com/mazze93/daedalus ~/.daedalus
    ```
 
 2. **Create directories**:
    ```bash
-   mkdir -p ~/.daedalus/{daedalus,ryan,creative,community}
+   mkdir -p ~/.daedalus/{daedalus,personal,creative,community}
    ```
 
 3. **Make scripts executable**:
@@ -142,9 +139,9 @@ notifications:
 
 filesystem:
   hide_directories:
-    - "~/.daedalus/ryan"
+    - "~/.daedalus/personal"
   spotlight_ignore:
-    - "~/.daedalus/ryan"
+    - "~/.daedalus/personal"
 ```
 
 ### Customizing Contexts
@@ -163,7 +160,7 @@ filesystem:
 3. **Create new SSH keys per context** (recommended):
    ```bash
    ssh-keygen -t ed25519 -C "daedalus@secure-pride" -f ~/.ssh/id_rsa_security
-   ssh-keygen -t ed25519 -C "ryan" -f ~/.ssh/id_rsa_personal
+   ssh-keygen -t ed25519 -C "personal" -f ~/.ssh/id_rsa_personal
    ```
 
 4. **Set up Safari/Chrome profiles** (first-time setup):
@@ -190,7 +187,7 @@ Activate an identity context. Orchestrates:
 
 **Example**:
 ```bash
-daedalus switch ryan
+daedalus switch personal
 # Output:
 # ├─ Loading context configuration...
 # ├─ Configuring VPN...
@@ -216,7 +213,7 @@ daedalus status
 # │  iTerm2: ✓ Running
 # │  Safari: ✓ Running
 # ├─ Last Switch: [2026-01-13 15:30:45] SWITCH_SUCCESS context=daedalus
-# └─ Available Contexts: daedalus, ryan, creator, organizer
+# └─ Available Contexts: daedalus, personal, creator, organizer
 ```
 
 ### `daedalus audit`
@@ -243,7 +240,7 @@ daedalus log 30
 
 # Output:
 # [2026-01-13 15:30:45] SWITCH_SUCCESS context=daedalus
-# [2026-01-13 14:15:22] SWITCH_SUCCESS context=ryan
+# [2026-01-13 14:15:22] SWITCH_SUCCESS context=personal
 # [2026-01-13 13:00:10] SWITCH_SUCCESS context=creator
 ```
 
@@ -285,7 +282,7 @@ daedalus emergency-kill
 │   └── _emergency_kill.sh    # Full reset protocol
 ├── config/
 │   ├── daedalus.yaml         # Security professional context
-│   ├── ryan.yaml             # Adult content creator context
+│   ├── personal.yaml             # Personal context
 │   ├── creator.yaml          # Creative work context
 │   └── organizer.yaml        # Community leadership context
 ├── lib/
@@ -294,7 +291,7 @@ daedalus emergency-kill
 │   └── validation.sh         # Context + config validation
 ├── logs/
 │   └── audit.log             # Timestamped context switch history
-└── {daedalus,ryan,creative,community}/
+└── {daedalus,personal,creative,community}/
     # Context-specific data directories (created by user)
 ```
 
@@ -309,15 +306,15 @@ daedalus emergency-kill
 ### How Context Switching Works
 
 ```
-User: daedalus switch ryan
+User: daedalus switch personal
     ↓
 Main dispatcher (bin/daedalus)
     ├─ Validate context exists
     ├─ Log SWITCH_START event
     ├─ Call _switch.sh orchestrator
-    │   ├─ Load ryan.yaml config
+    │   ├─ Load personal.yaml config
     │   ├─ Call _vpn.sh
-    │   │   └─ protonvpn disconnect → protonvpn connect --servername ryan
+    │   │   └─ protonvpn disconnect → protonvpn connect --servername personal
     │   ├─ Call _terminal.sh
     │   │   └─ Set iTerm2 profile, SSH key, env vars
     │   ├─ Call _browser.sh
@@ -325,7 +322,7 @@ Main dispatcher (bin/daedalus)
     │   ├─ Call _notifications.sh
     │   │   └─ Activate Focus mode "Creator"
     │   ├─ Call _filesystem.sh
-    │   │   └─ Hide other contexts, show ryan directory
+    │   │   └─ Hide other contexts, show personal directory
     │   └─ Return success/failure
     ├─ Log SWITCH_SUCCESS event
     └─ Print status summary
@@ -533,7 +530,7 @@ Feel free to improve DAEDALUS! Test thoroughly before committing changes.
 
 ## License
 
-DAEDALUS is part of the Secure Pride initiative.  
+[Apache-2.0](LICENSE). DAEDALUS is part of the Secure Pride initiative.  
 Privacy-first, open-source, built for protecting marginalized communities.  
 
 ---

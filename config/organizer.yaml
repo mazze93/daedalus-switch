@@ -53,11 +53,11 @@ filesystem:
   mount_paths: []
   hide_directories:
     - "~/.daedalus/daedalus"
-    - "~/.daedalus/ryan"
+    - "~/.daedalus/personal"
     - "~/.daedalus/creative"
   spotlight_ignore:
     - "~/.daedalus/daedalus"
-    - "~/.daedalus/ryan"
+    - "~/.daedalus/personal"
 
 applications:
   allowed:
