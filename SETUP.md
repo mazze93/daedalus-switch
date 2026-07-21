@@ -11,7 +11,7 @@ protonvpn list    # View available servers
 
 ### 2. Copy DAEDALUS
 ```bash
-git clone https://github.com/mazze93/daedalus ~/.daedalus
+git clone https://github.com/mazze93/daedalus-switch ~/.daedalus
 mkdir -p ~/.daedalus/{daedalus,personal,creative,community}
 ```
 

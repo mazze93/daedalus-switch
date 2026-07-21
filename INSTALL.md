@@ -74,11 +74,7 @@ ssh-keygen -t ed25519 -C "organizer" -f ~/.ssh/id_rsa_community
 ### Step 1: Copy DAEDALUS
 
 ```bash
-# Copy from mcp-work (if building from project)
-git clone https://github.com/mazze93/daedalus ~/.daedalus
-
-# OR: Clone if using git
-git clone https://github.com/secure-pride/daedalus.git ~/.daedalus
+git clone https://github.com/mazze93/daedalus-switch ~/.daedalus
 ```
 
 ### Step 2: Create Context Directories

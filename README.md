@@ -58,7 +58,7 @@ daedalus switch organizer   # Community leadership mode
 1. **Copy DAEDALUS to your home directory**:
    ```bash
    # If building from the project:
-   git clone https://github.com/mazze93/daedalus ~/.daedalus
+   git clone https://github.com/mazze93/daedalus-switch ~/.daedalus
    ```
 
 2. **Create directories**:
