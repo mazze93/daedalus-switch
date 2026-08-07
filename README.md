@@ -1,4 +1,4 @@
-# DAEDALUS: Identity & Context Switcher
+# DAEDALUS-switch: Identity & Context Switcher
 ![Platform](https://img.shields.io/badge/Platform-macOS-blue)
 ![Interface](https://img.shields.io/badge/Interface-CLI%20%2B%20Automation-success)
 ![Privacy](https://img.shields.io/badge/Posture-Privacy--First-critical)
