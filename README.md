@@ -2,7 +2,7 @@
 ![Platform](https://img.shields.io/badge/Platform-macOS-blue)
 ![Interface](https://img.shields.io/badge/Interface-CLI%20%2B%20Automation-success)
 ![Privacy](https://img.shields.io/badge/Posture-Privacy--First-critical)
-![Status](https://img.shields.io/badge/Status-Production--Ready-brightgreen)
+![Status](https://img.shields.io/badge/Status-Beta-yellow)
 
 ![DAEDALUS Social Preview](.github/social-preview.png)
 
